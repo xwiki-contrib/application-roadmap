@@ -1,0 +1,299 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.4" reference="RoadMaps.Code.ConfigurationSheet" locale="">
+  <web>RoadMaps.Code</web>
+  <name>ConfigurationSheet</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title>#if($doc.documentReference.name == 'ConfigurationSheet')Configuration Sheet#{else}$services.display.title($doc, {'displayerHint': 'default', 'outputSyntaxId': 'plain/1.0'})#end</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity output="false"}}
+#macro (stripHTMLMacro $displayOutput)
+  $stringtool.removeEnd($stringtool.removeStart($displayOutput, '{{html clean="false" wiki="false"}}'), '{{/html}}')
+#end
+#macro (showProperty $propertyName $displayProperty)
+  &lt;dl style="display: $displayProperty"&gt;
+    #set ($displayOutput = $doc.display($propertyName, $mode))
+    &lt;dd&gt;#stripHTMLMacro($displayOutput)&lt;/dd&gt;
+  &lt;/dl&gt;
+#end
+{{/velocity}}
+
+{{velocity}}
+
+#set($discard = $xwiki.ssx.use('IconThemesCode.IconPicker'))
+#set($discard = $xwiki.ssx.use('AppWithinMinutes.ClassSheetGenerator'))
+
+#set ($roadmapConfigClassName = 'RoadMaps.Code.ConfigurationClass')
+#set ($discard = $doc.use($roadmapConfigClassName))
+#set ($roadmapConfig = $xwiki.getDocument("RoadMaps.Code.Configuration"))
+#set ($editing = $xcontext.action == 'edit' || $xcontext.action == 'admin')
+#set ($mode = "#if ($editing)edit#{else}view#end")
+
+{{html wiki="true" clean="false"}}
+#if ($xcontext.action == 'admin')
+  $xwiki.jsx.use('RoadMaps.Code.ConfigurationSheet')
+  &lt;button id="addStuff" class='btn btn-secondary'&gt;Add Status&lt;/button&gt;
+    &lt;form action="$doc.getURL('save')" class="roadmap-config xform"&gt;
+      &lt;div class="hidden"&gt;
+        &lt;input type="hidden" name="form_token" value="$!escapetool.xml($services.csrf.token)"/&gt;
+      &lt;/div&gt;
+#else
+  &lt;div class="roadmap-config xform"&gt;
+#end
+##start of custom fields display
+#set ($json = $roadmapConfig.get($roadmapConfigClassName).getStringValue("statusValues"))
+#set ($jsonObj = $jsontool.fromString($json))
+## statuses and icons
+#foreach ($key in $jsonObj.keySet())
+  #set ($prettyName = $escapetool.xml($jsonObj.get($key).prettyName))
+  (% class="row" id="${key}" %) (((
+  #if ($xcontext.action == 'admin')
+    (% class="col-xs-12 col-md-12" %) (((
+      &lt;a id="${key}" class="pull-right"&gt;&lt;span class="fa fa-times"&gt;&lt;/span&gt;&lt;/a&gt;
+    )))
+  #end
+  (% class="col-xs-12 col-md-6" %) (((
+    &lt;dl&gt;
+      &lt;dt&gt;
+        &lt;label for="${key}-status"&gt;Status&lt;/label&gt;
+        &lt;input name="${key}" id="${key}-status" class="jsonKey" type="text" value="$prettyName"/&gt;
+      &lt;/dt&gt;
+    &lt;/dl&gt;
+  )))
+  (% class="col-xs-12 col-md-6" %) (((
+    &lt;dl&gt;
+      &lt;dt&gt;
+        &lt;label for="${key}-icon"&gt;Icon $services.icon.render($jsonObj.get($key).get('icon'))&lt;/label&gt;
+        &lt;input id="${key}-icon" name="${key}-icon" type="text" value="$jsonObj.get($key).get('icon')"/&gt;
+      &lt;/dt&gt;
+    &lt;/dl&gt;
+  )))
+  )))
+#end
+##end of custom fields display
+#showProperty('statusValues', 'none')
+#if ($xcontext.action == 'admin')
+  &lt;p&gt;
+    &lt;input type="submit" class="btn btn-primary" name="action_saveandcontinue"
+      value="$escapetool.xml($services.localization.render('save'))"/&gt;
+  &lt;/p&gt;
+&lt;/form&gt;
+#else
+  &lt;/div&gt;
+#end
+{{/html}}
+{{/velocity}}</content>
+  <object>
+    <name>RoadMaps.Code.ConfigurationSheet</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>59109163-0be1-483e-9d1e-805e2f6098bd</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <defaultValue>long</defaultValue>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require.config({
+  paths: {
+    'xwiki-icon-picker': '/xwiki/bin/jsx/IconThemesCode/IconPicker?minify=true'
+  }
+});
+
+require(['jquery', 'xwiki-icon-picker'], function ($) {
+  // create json object
+  const jsonObj = JSON.parse($('textarea').val());
+  // before saving, update the json and put all its contents in the text area
+  $(document).on('xwiki:actions:beforeSave', function (event, data) {
+    // map used to store the old/new keys and later update the keys
+    const updatedNames = new Map();
+    // iterate over each status value
+    $('.jsonKey').each(function () {
+      const keyValue = $(this).attr('name');
+      //update the values
+      var obj = { prettyName: $(this).val(), icon: $(`#${keyValue}-icon`).val() };
+      jsonObj[keyValue] = obj;
+
+      const newName = camelCase($(this).val());
+      updatedNames.set(keyValue, newName);
+    });
+    // renew the json key values
+    var jsonString = JSON.stringify(jsonObj);
+    for (let [oldName, newName] of updatedNames) {
+      if (newName != '' &amp;&amp; oldName != newName) {
+        jsonString = jsonString.replace(oldName, newName);
+      }
+    }
+    $('textarea').val(jsonString);
+  });
+
+  // init icon pickers and add listener for &lt;a&gt; tags that delete the divs
+  $('.jsonKey').each(function () {
+    const keyValue = $(this).attr('name');
+    addDeleteListener($, keyValue, jsonObj);
+
+    linkIconPickerTo($, keyValue);
+
+  });
+
+  // add new status when clicking add button
+  $(document).on('click', 'button#addStuff', function () {
+    var randomName = Math.random().toString(36).substring(7);
+
+    var row = $(`&lt;div id=${randomName}&gt;&lt;/div&gt;`).html(`&lt;a id="${randomName}" style=""&gt;&lt;span class="fa fa-times"&gt;&lt;/span&gt;&lt;/a&gt;` +
+      `&lt;dl&gt;&lt;dt&gt;New Status&lt;/dt&gt;&lt;dd&gt;&lt;input type="text" name="${randomName}" class="jsonKey"/&gt;&lt;/dd&gt;&lt;/dl&gt;` +
+      `&lt;dl&gt;&lt;dt&gt;New Status Icon&lt;/dt&gt;&lt;dd&gt;&lt;input type="text" id="${randomName}-icon"/&gt;&lt;/dd&gt;&lt;/dl&gt;`);
+    $('.roadmap-config').prepend(row);
+    addDeleteListener($, randomName, jsonObj);
+    linkIconPickerTo($, randomName);
+  });
+
+  $(document).on('xwiki:document:saved', function (event, data) {
+    location.reload();
+  });
+});
+
+function camelCase(str) {
+  return str
+    .replace(/\s(.)/g, function (a) {
+      return a.toUpperCase();
+    })
+    .replace(/\s/g, '')
+    .replace(/^(.)/, function (b) {
+      return b.toLowerCase();
+    });
+}
+
+function addDeleteListener($, id, jsonObj) {
+  $(`a#${id}`).click(function () {
+    delete jsonObj[id];
+    $('textarea').val(JSON.stringify(jsonObj));
+    $(`div#${id}`).remove();
+  });
+}
+
+function linkIconPickerTo($, id) {
+  var options = {};
+  options['prefix'] = '';
+  $('#' + id + '-icon').xwikiIconPicker(options);
+  console.debug('#' + id + '-icon');
+}
+</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use/>
+    </property>
+  </object>
+</xwikidoc>
