@@ -84,7 +84,7 @@
     </detailedScope>
     <endDate>
       <customDisplay/>
-      <dateFormat>dd MMM</dateFormat>
+      <dateFormat>dd MMM YYYY</dateFormat>
       <disabled>0</disabled>
       <emptyIsToday>1</emptyIsToday>
       <hint/>
@@ -92,7 +92,7 @@
       <number>2</number>
       <picker>1</picker>
       <prettyName>Ending Date</prettyName>
-      <size>6</size>
+      <size>11</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -117,7 +117,7 @@
     </shortScope>
     <startDate>
       <customDisplay/>
-      <dateFormat>dd MMM</dateFormat>
+      <dateFormat>dd MMM YYYY</dateFormat>
       <disabled>0</disabled>
       <emptyIsToday>1</emptyIsToday>
       <hint/>
@@ -125,7 +125,7 @@
       <number>1</number>
       <picker>1</picker>
       <prettyName>Starting Date</prettyName>
-      <size>6</size>
+      <size>11</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
