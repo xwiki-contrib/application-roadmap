@@ -43,9 +43,9 @@
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:git://github.com:xwiki-contrib/application-roadmap.git</connection>
+    <connection>scm:git:git://github.com/xwiki-contrib/application-roadmap.git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/application-roadmap.git</developerConnection>
-    <url>https://github.com/xwiki-contrib/macro-pdfviewer</url>
+    <url>https://github.com/xwiki-contrib/application-roadmap/tree/master</url>
     <tag>application-roadmap-1.0</tag>
   </scm>
   <modules>
