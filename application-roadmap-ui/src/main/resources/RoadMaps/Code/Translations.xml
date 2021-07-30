@@ -36,7 +36,9 @@
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content>roadmap.class.doc.title=Roadmap Title
+  <content>roadmap.panel.title=Roadmaps
+
+roadmap.class.doc.title=Roadmap Title
 roadmap.class.startDate=Starting Date
 roadmap.class.endDate=Ending Date
 roadmap.class.status=Status
