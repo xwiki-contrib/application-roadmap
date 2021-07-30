@@ -247,7 +247,7 @@
 #set ($percentage = $wikimacro.parameters.percentage)
 #set ($additionalInfo = $!wikimacro.parameters.additionalInfo)
 #set ($otherPercentage = 100 - $percentage)
-#if ($otherPercentage &gt;= 0)
+#if ($otherPercentage &lt;= 0)
 #set($otherPercentage = '')
 #else
 #set($otherPercentage = "$otherPercentage.intValue()% ")
