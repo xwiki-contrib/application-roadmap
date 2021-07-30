@@ -33,6 +33,8 @@
   <packaging>pom</packaging>
   <properties>
     <platform.version>13.6</platform.version>
+    <xwiki.release.jira.skip>false</xwiki.release.jira.skip>
+    <xwiki.issueManagement.jira.id>XROADMAP</xwiki.issueManagement.jira.id>
   </properties>
   <developers>
     <developer>
@@ -46,12 +48,8 @@
     <url>https://github.com/xwiki-contrib/macro-pdfviewer</url>
     <tag>HEAD</tag>
   </scm>
-  <issueManagement>
-    <system>jira</system>
-    <url>https://jira.xwiki.org/projects/XROADMAP/summary</url>
-  </issueManagement>
   <modules>
-    <module>api</module>
-    <module>ui</module>
+    <module>application-roadmap-api</module>
+    <module>application-roadmap-ui</module>
   </modules>
 </project>

@@ -36,16 +36,18 @@
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content>roadmap.doc.title=Roadmap Title
-roadmap.startDate=Starting Date
-roadmap.endDate=Ending Date
-roadmap.status=Status
-roadmap.capacity=Capacity
-roadmap.notStarted=Not Started
-roadmap.finished=Finished
-roadmap.inProgress=In Progress
-roadmap.shortScope=Short Scope
-roadmap.detailedScope=Detailed Scope</content>
+  <content>roadmap.class.doc.title=Roadmap Title
+roadmap.class.startDate=Starting Date
+roadmap.class.endDate=Ending Date
+roadmap.class.status=Status
+roadmap.class.capacity=Capacity
+roadmap.class.shortScope=Short Scope
+roadmap.class.detailedScope=Detailed Scope
+roadmap.class.emptyvalue=No Status
+
+roadmap.status.notStarted=Not Started
+roadmap.status.finished=Finished
+roadmap.status.inProgress=In Progress</content>
   <object>
     <name>RoadMaps.Code.Translations</name>
     <number>0</number>

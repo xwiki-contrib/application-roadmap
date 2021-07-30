@@ -148,7 +148,7 @@
       <relationalStorage>0</relationalStorage>
       <separator> </separator>
       <separators>|, </separators>
-      <size>3</size>
+      <size>1</size>
       <sort>id</sort>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>

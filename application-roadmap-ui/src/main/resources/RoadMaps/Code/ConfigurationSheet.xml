@@ -40,11 +40,38 @@
 #macro (stripHTMLMacro $displayOutput)
   $stringtool.removeEnd($stringtool.removeStart($displayOutput, '{{html clean="false" wiki="false"}}'), '{{/html}}')
 #end
-#macro (showProperty $propertyName $displayProperty)
-  &lt;dl style="display: $displayProperty"&gt;
+#macro (showProperty $propertyName)
+  &lt;dl class="hidden"&gt;
     #set ($displayOutput = $doc.display($propertyName, $mode))
-    &lt;dd&gt;#stripHTMLMacro($displayOutput)&lt;/dd&gt;
+    &lt;dd class="jsonInput"&gt;#stripHTMLMacro($displayOutput)&lt;/dd&gt;
   &lt;/dl&gt;
+#end
+
+#macro (showStatus $key $divClass)
+  #set ($prettyName = $!escapetool.xml($jsonObj.get($key).prettyName))
+  &lt;div class="row $!divClass" id="${key}"&gt;
+  #if ($xcontext.action == 'admin')
+    &lt;div class="col-xs-12 col-md-12"&gt;
+      &lt;a id="${key}" class="pull-right remove"&gt;&lt;span class="fa fa-times"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  #end
+  &lt;div class="col-xs-12 col-md-6"&gt;
+    &lt;dl&gt;
+      &lt;dt&gt;
+        &lt;label for="${key}-status"&gt;Status&lt;/label&gt;
+        &lt;input name="${key}" id="${key}-status" class="jsonKey" type="text" value="$!prettyName"/&gt;
+      &lt;/dt&gt;
+    &lt;/dl&gt;
+  &lt;/div&gt;
+  &lt;div class="col-xs-12 col-md-6"&gt;
+    &lt;dl&gt;
+      &lt;dt&gt;
+        &lt;label for="${key}-icon"&gt;Icon $!services.icon.render($jsonObj.get($key).get('icon'))&lt;/label&gt;
+        &lt;input id="${key}-icon" name="${key}-icon" type="text" value="$!jsonObj.get($key).get('icon')"/&gt;
+      &lt;/dt&gt;
+    &lt;/dl&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
 #end
 {{/velocity}}
 
@@ -59,11 +86,14 @@
 #set ($editing = $xcontext.action == 'edit' || $xcontext.action == 'admin')
 #set ($mode = "#if ($editing)edit#{else}view#end")
 
+== Roadmap Item Macro Statuses ==
 {{html wiki="true" clean="false"}}
 #if ($xcontext.action == 'admin')
-  $xwiki.jsx.use('RoadMaps.Code.ConfigurationSheet')
-  &lt;button id="addStuff" class='btn btn-secondary'&gt;Add Status&lt;/button&gt;
-    &lt;form action="$doc.getURL('save')" class="roadmap-config xform"&gt;
+  #set ($discard = $xwiki.jsx.use('RoadMaps.Code.ConfigurationSheet'))
+  #set ($discard = $xwiki.ssx.use('RoadMaps.Code.ConfigurationSheet'))
+  
+  &lt;button id="addStatus" class='btn btn-secondary'&gt;Add Status&lt;/button&gt;
+    &lt;form action="$doc.getURL('save')" id="xsaveForm" class="roadmap-config xform"&gt;
       &lt;div class="hidden"&gt;
         &lt;input type="hidden" name="form_token" value="$!escapetool.xml($services.csrf.token)"/&gt;
       &lt;/div&gt;
@@ -75,33 +105,11 @@
 #set ($jsonObj = $jsontool.fromString($json))
 ## statuses and icons
 #foreach ($key in $jsonObj.keySet())
-  #set ($prettyName = $escapetool.xml($jsonObj.get($key).prettyName))
-  (% class="row" id="${key}" %) (((
-  #if ($xcontext.action == 'admin')
-    (% class="col-xs-12 col-md-12" %) (((
-      &lt;a id="${key}" class="pull-right"&gt;&lt;span class="fa fa-times"&gt;&lt;/span&gt;&lt;/a&gt;
-    )))
-  #end
-  (% class="col-xs-12 col-md-6" %) (((
-    &lt;dl&gt;
-      &lt;dt&gt;
-        &lt;label for="${key}-status"&gt;Status&lt;/label&gt;
-        &lt;input name="${key}" id="${key}-status" class="jsonKey" type="text" value="$prettyName"/&gt;
-      &lt;/dt&gt;
-    &lt;/dl&gt;
-  )))
-  (% class="col-xs-12 col-md-6" %) (((
-    &lt;dl&gt;
-      &lt;dt&gt;
-        &lt;label for="${key}-icon"&gt;Icon $services.icon.render($jsonObj.get($key).get('icon'))&lt;/label&gt;
-        &lt;input id="${key}-icon" name="${key}-icon" type="text" value="$jsonObj.get($key).get('icon')"/&gt;
-      &lt;/dt&gt;
-    &lt;/dl&gt;
-  )))
-  )))
+  #showStatus($key)
 #end
+#showStatus("template", 'hidden')
 ##end of custom fields display
-#showProperty('statusValues', 'none')
+#showProperty('statusValues')
 #if ($xcontext.action == 'admin')
   &lt;p&gt;
     &lt;input type="submit" class="btn btn-primary" name="action_saveandcontinue"
@@ -208,7 +216,7 @@
 
 require(['jquery', 'xwiki-icon-picker'], function ($) {
   // create json object
-  const jsonObj = JSON.parse($('textarea').val());
+  const jsonObj = JSON.parse($('.jsonInput&gt;textarea').val());
   // before saving, update the json and put all its contents in the text area
   $(document).on('xwiki:actions:beforeSave', function (event, data) {
     // map used to store the old/new keys and later update the keys
@@ -216,6 +224,7 @@ require(['jquery', 'xwiki-icon-picker'], function ($) {
     // iterate over each status value
     $('.jsonKey').each(function () {
       const keyValue = $(this).attr('name');
+      if (keyValue == 'template') return;
       //update the values
       var obj = { prettyName: $(this).val(), icon: $(`#${keyValue}-icon`).val() };
       jsonObj[keyValue] = obj;
@@ -236,28 +245,37 @@ require(['jquery', 'xwiki-icon-picker'], function ($) {
   // init icon pickers and add listener for &lt;a&gt; tags that delete the divs
   $('.jsonKey').each(function () {
     const keyValue = $(this).attr('name');
-    addDeleteListener($, keyValue, jsonObj);
-
     linkIconPickerTo($, keyValue);
-
   });
 
   // add new status when clicking add button
-  $(document).on('click', 'button#addStuff', function () {
+  $(document).on('click', 'button#addStatus', function () {
     var randomName = Math.random().toString(36).substring(7);
 
-    var row = $(`&lt;div id=${randomName}&gt;&lt;/div&gt;`).html(`&lt;a id="${randomName}" style=""&gt;&lt;span class="fa fa-times"&gt;&lt;/span&gt;&lt;/a&gt;` +
-      `&lt;dl&gt;&lt;dt&gt;New Status&lt;/dt&gt;&lt;dd&gt;&lt;input type="text" name="${randomName}" class="jsonKey"/&gt;&lt;/dd&gt;&lt;/dl&gt;` +
-      `&lt;dl&gt;&lt;dt&gt;New Status Icon&lt;/dt&gt;&lt;dd&gt;&lt;input type="text" id="${randomName}-icon"/&gt;&lt;/dd&gt;&lt;/dl&gt;`);
-    $('.roadmap-config').prepend(row);
-    addDeleteListener($, randomName, jsonObj);
+    var template = $('div#template');
+    var newStatus = template.clone();
+    
+    newStatus.attr('id', randomName);
+    newStatus.removeClass('hidden');
+    
+    var statusHtml = newStatus.html();
+    statusHtml = statusHtml.replaceAll('template', randomName);
+    newStatus.html(statusHtml);
+    newStatus.find('input').prop('disabled', false);
+    
+    template.before(newStatus);
     linkIconPickerTo($, randomName);
   });
-
-  $(document).on('xwiki:document:saved', function (event, data) {
-    location.reload();
+  
+  $(document).on('click', 'a.remove', function () { 
+    var id = $(this).attr('id');
+    delete jsonObj[id];
+    $('textarea').val(JSON.stringify(jsonObj));
+    $(`div#${id}`).remove();
   });
+
 });
+
 
 function camelCase(str) {
   return str
@@ -270,14 +288,6 @@ function camelCase(str) {
     });
 }
 
-function addDeleteListener($, id, jsonObj) {
-  $(`a#${id}`).click(function () {
-    delete jsonObj[id];
-    $('textarea').val(JSON.stringify(jsonObj));
-    $(`div#${id}`).remove();
-  });
-}
-
 function linkIconPickerTo($, id) {
   var options = {};
   options['prefix'] = '';
@@ -288,6 +298,130 @@ function linkIconPickerTo($, id) {
     </property>
     <property>
       <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use/>
+    </property>
+  </object>
+  <object>
+    <name>RoadMaps.Code.ConfigurationSheet</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>00db1fcb-0c4c-4fa8-928d-9d31204c873e</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <defaultValue>long</defaultValue>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>.remove {
+  position: absolute;
+  right: 1.25em;
+  z-index: 1;
+}</code>
+    </property>
+    <property>
+      <contentType/>
+    </property>
+    <property>
+      <name>style sheet</name>
     </property>
     <property>
       <parse/>

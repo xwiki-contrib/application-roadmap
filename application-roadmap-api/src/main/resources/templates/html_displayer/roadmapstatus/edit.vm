@@ -17,9 +17,9 @@
 ## Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 ## 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 ## ---------------------------------------------------------------------------
-#set ($confObj = $xwiki.getDocument("RoadMaps.Code.Configuration").getObject("RoadMaps.Code.ConfigurationClass"))
+#set ($confObj = $xwiki.getDocument('RoadMaps.Code.Configuration').getObject('RoadMaps.Code.ConfigurationClass'))
 
-#set ($json = $confObj.get("statusValues"))
+#set ($json = $confObj.getValue('statusValues'))
 
 #set ($jsonObj = $jsontool.fromString($json))
 
@@ -28,11 +28,10 @@
       $escapetool.xml($parameter.key)="$!escapetool.xml($parameter.value)"
     #end
 >   
-    #foreach ($obj in $jsonObj.keySet())
-      #set ($prettyVal = $jsonObj.get($obj).get('prettyName'))
-    ##<option value="$escapetool.xml($obj)">$escapetool.xml($jsonObj.get($obj).get("prettyName"))</option>
-      #if ("$!prettyVal" != '') 
-        <option value="$escapetool.xml($obj)">$!escapetool.xml($prettyVal)</option>
+    #foreach ($obj in $jsonObj.entrySet())
+      #set ($prettyVal = $obj.value.prettyName)
+      #if ("$!prettyVal" != '')
+        <option value="$escapetool.xml($obj.key)">$!escapetool.xml($prettyVal)</option>
       #end
     #end
 </select>

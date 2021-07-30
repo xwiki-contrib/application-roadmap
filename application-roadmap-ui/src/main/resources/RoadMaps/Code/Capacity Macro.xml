@@ -20,9 +20,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.RoadMap Item Macro" locale="">
+<xwikidoc version="1.4" reference="RoadMaps.Code.Capacity Macro" locale="">
   <web>RoadMaps.Code</web>
-  <name>RoadMap Item Macro</name>
+  <name>Capacity Macro</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -36,13 +36,12 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>
-</content>
+  <content/>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>RoadMaps.Code.Capacity Macro</name>
     <number>0</number>
     <className>XWiki.WikiMacroClass</className>
-    <guid>a1fd04cb-3ac2-47ea-aa7f-2b98e3499d04</guid>
+    <guid>b7c1e13f-3c74-4b5b-9b36-ac7f26c1f30f</guid>
     <class>
       <name>XWiki.WikiMacroClass</name>
       <customClass/>
@@ -244,32 +243,23 @@
     </property>
     <property>
       <code>{{velocity}}
-## retrieve all necessary parameters
-#set ($users = $wikimacro.parameters.assignee)
-#set ($description = $escapetool.xml($wikimacro.parameters.description))
-#set ($optional = $escapetool.xml($wikimacro.parameters.optional))
-#set ($project = $escapetool.xml($wikimacro.parameters.project))
-#set ($urlString = $escapetool.xml($wikimacro.parameters.url))
-#set ($statusKey = $xcontext.macro.params.status)
-#set ($status = $escapetool.xml($services.localization.render("roadmap.$statusKey")))
-## get the config document and obj
-#set ($confObj = $xwiki.getDocument("RoadMaps.Code.Configuration").get("RoadMaps.Code.ConfigurationClass"))
-## get the json of the possible roadmap status values and their associated icons
-#set ($json = $confObj.getStringValue("statusValues"))
-#set ($jsonObj = $jsontool.fromString($json))
-## get the id of the issue ex. https://jira.xwikisas.com/browse/XNNG-13 - we want the XNNG-13 
-#set ($lastSlash = $stringtool.lastIndexOf($urlString, '/'))
-#set ($file = $stringtool.substring($urlString, $lastSlash + 1))
-#if ($stringtool.isNumeric($file))#set ($file = "#$file")#end
-
-#set ($icon = $jsonObj.get($statusKey).get("icon"))
-#if ("$!icon" == '') #set($icon = $jsonObj.get($statusKey).get('prettyName'))#end
-
-(% #if ($optional == 'true')style="color: gray;"#end title = "$!jsonObj.get($statusKey).prettyName" %)
-(((
-$services.icon.render($!icon, 'Silk') #foreach ($user in $users) [[$user.reference]]#if ($foreach.hasNext), #end#end: [[$file&gt;&gt;$urlString]] - $!description - //$project//#if ($optional == 'true') //(optional)//#end
-)))
-{{/velocity}}</code>
+#set ($user = $wikimacro.parameters.user)
+#set ($percentage = $wikimacro.parameters.percentage)
+#set ($additionalInfo = $!wikimacro.parameters.additionalInfo)
+#set ($otherPercentage = 100 - $percentage)
+#if ($otherPercentage &gt;= 0)
+#set($otherPercentage = '')
+#else
+#set($otherPercentage = "$otherPercentage.intValue()% ")
+#end
+{{html wiki='true'}}
+&lt;span&gt;
+  {{useravatar username="$user.reference" width="30" height="30" /}}
+  &lt;a href="$xwiki.getURL($user.reference)"&gt;$user.reference.name&lt;/a&gt;: $percentage% #if("$!otherPercentage"!='' || "$!additionalInfo" != '')($otherPercentage$!additionalInfo)#end
+&lt;/span&gt;
+{{/html}}
+{{/velocity}}
+</code>
     </property>
     <property>
       <contentDescription/>
@@ -284,13 +274,13 @@ $services.icon.render($!icon, 'Silk') #foreach ($user in $users) [[$user.referen
       <defaultCategory>Content</defaultCategory>
     </property>
     <property>
-      <description>A roadmap item that will hold information about tasks.</description>
+      <description>Display the capacity of each employee for the current roadmap.</description>
     </property>
     <property>
-      <id>roadmapitem</id>
+      <id>capacity</id>
     </property>
     <property>
-      <name>Roadmap Item Macro</name>
+      <name>Roadmap Capacity</name>
     </property>
     <property>
       <priority/>
@@ -299,14 +289,14 @@ $services.icon.render($!icon, 'Silk') #foreach ($user in $users) [[$user.referen
       <supportsInlineMode>1</supportsInlineMode>
     </property>
     <property>
-      <visibility>Global</visibility>
+      <visibility>Wiki</visibility>
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>RoadMaps.Code.Capacity Macro</name>
     <number>0</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>e10c22df-c778-41a3-b539-87091ccca1ac</guid>
+    <guid>f2de2ef0-ad21-41a6-a02b-7bd895c61392</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -368,23 +358,23 @@ $services.icon.render($!icon, 'Silk') #foreach ($user in $users) [[$user.referen
       <defaultValue/>
     </property>
     <property>
-      <description>The user assigned for this task.</description>
+      <description>The user represented by this capacity.</description>
     </property>
     <property>
       <mandatory>1</mandatory>
     </property>
     <property>
-      <name>assignee</name>
+      <name>user</name>
     </property>
     <property>
-      <type>java.util.List&lt;org.xwiki.user.UserReference&gt;</type>
+      <type>org.xwiki.user.UserReference</type>
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>RoadMaps.Code.Capacity Macro</name>
     <number>1</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>ba369109-3741-4c4d-b8e3-737288443fb1</guid>
+    <guid>efa02d01-c9b2-4737-a33b-077f373f4b96</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -443,26 +433,26 @@ $services.icon.render($!icon, 'Silk') #foreach ($user in $users) [[$user.referen
       </type>
     </class>
     <property>
-      <defaultValue/>
+      <defaultValue>100</defaultValue>
     </property>
     <property>
-      <description>Roadmap item description.</description>
+      <description>The percentage associated to the user. The default will be 100.</description>
     </property>
     <property>
       <mandatory>0</mandatory>
     </property>
     <property>
-      <name>description</name>
+      <name>percentage</name>
     </property>
     <property>
       <type>java.lang.String</type>
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>RoadMaps.Code.Capacity Macro</name>
     <number>2</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>5270b2ce-1c42-4f1a-9839-63f7bef90cdc</guid>
+    <guid>e19cea22-f5dd-463f-a749-1d998cdf3d32</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -524,250 +514,16 @@ $services.icon.render($!icon, 'Silk') #foreach ($user in $users) [[$user.referen
       <defaultValue/>
     </property>
     <property>
-      <description>Specifies whether the task is mandatory or optional.</description>
+      <description>Any additional information with regards to the capacity of this road-map or the project associated with the remaining percentage.</description>
     </property>
     <property>
       <mandatory>0</mandatory>
     </property>
     <property>
-      <name>optional</name>
-    </property>
-    <property>
-      <type>java.lang.Boolean</type>
-    </property>
-  </object>
-  <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
-    <number>3</number>
-    <className>XWiki.WikiMacroParameterClass</className>
-    <guid>4c89553b-5fa2-414f-b306-23ec7d9f4d3c</guid>
-    <class>
-      <name>XWiki.WikiMacroParameterClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <defaultValue>
-        <disabled>0</disabled>
-        <name>defaultValue</name>
-        <number>4</number>
-        <prettyName>Parameter default value</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </defaultValue>
-      <description>
-        <disabled>0</disabled>
-        <name>description</name>
-        <number>2</number>
-        <prettyName>Parameter description</prettyName>
-        <rows>5</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </description>
-      <mandatory>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType>yesno</displayType>
-        <name>mandatory</name>
-        <number>3</number>
-        <prettyName>Parameter mandatory</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </mandatory>
-      <name>
-        <disabled>0</disabled>
-        <name>name</name>
-        <number>1</number>
-        <prettyName>Parameter name</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </name>
-      <type>
-        <disabled>0</disabled>
-        <name>type</name>
-        <number>5</number>
-        <prettyName>Parameter type</prettyName>
-        <size>60</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </type>
-    </class>
-    <property>
-      <defaultValue/>
-    </property>
-    <property>
-      <description>Specifies the project: one of the cloud projects or one of the paid applications.</description>
-    </property>
-    <property>
-      <mandatory>1</mandatory>
-    </property>
-    <property>
-      <name>project</name>
+      <name>additionalInfo</name>
     </property>
     <property>
       <type>java.lang.String</type>
-    </property>
-  </object>
-  <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
-    <number>4</number>
-    <className>XWiki.WikiMacroParameterClass</className>
-    <guid>edaa1a11-c0dd-472b-b00f-503050007812</guid>
-    <class>
-      <name>XWiki.WikiMacroParameterClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <defaultValue>
-        <disabled>0</disabled>
-        <name>defaultValue</name>
-        <number>4</number>
-        <prettyName>Parameter default value</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </defaultValue>
-      <description>
-        <disabled>0</disabled>
-        <name>description</name>
-        <number>2</number>
-        <prettyName>Parameter description</prettyName>
-        <rows>5</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </description>
-      <mandatory>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType>yesno</displayType>
-        <name>mandatory</name>
-        <number>3</number>
-        <prettyName>Parameter mandatory</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </mandatory>
-      <name>
-        <disabled>0</disabled>
-        <name>name</name>
-        <number>1</number>
-        <prettyName>Parameter name</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </name>
-      <type>
-        <disabled>0</disabled>
-        <name>type</name>
-        <number>5</number>
-        <prettyName>Parameter type</prettyName>
-        <size>60</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </type>
-    </class>
-    <property>
-      <defaultValue/>
-    </property>
-    <property>
-      <description>Link to the ticket, if available</description>
-    </property>
-    <property>
-      <mandatory>1</mandatory>
-    </property>
-    <property>
-      <name>url</name>
-    </property>
-    <property>
-      <type>java.lang.String</type>
-    </property>
-  </object>
-  <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
-    <number>5</number>
-    <className>XWiki.WikiMacroParameterClass</className>
-    <guid>7393aad0-1495-4021-bc78-ed3db4abc8c2</guid>
-    <class>
-      <name>XWiki.WikiMacroParameterClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <defaultValue>
-        <disabled>0</disabled>
-        <name>defaultValue</name>
-        <number>4</number>
-        <prettyName>Parameter default value</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </defaultValue>
-      <description>
-        <disabled>0</disabled>
-        <name>description</name>
-        <number>2</number>
-        <prettyName>Parameter description</prettyName>
-        <rows>5</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </description>
-      <mandatory>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType>yesno</displayType>
-        <name>mandatory</name>
-        <number>3</number>
-        <prettyName>Parameter mandatory</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </mandatory>
-      <name>
-        <disabled>0</disabled>
-        <name>name</name>
-        <number>1</number>
-        <prettyName>Parameter name</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </name>
-      <type>
-        <disabled>0</disabled>
-        <name>type</name>
-        <number>5</number>
-        <prettyName>Parameter type</prettyName>
-        <size>60</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </type>
-    </class>
-    <property>
-      <defaultValue/>
-    </property>
-    <property>
-      <description>Specifies the status of the task. It can have one of the following values: not started / in progress / finished</description>
-    </property>
-    <property>
-      <mandatory>1</mandatory>
-    </property>
-    <property>
-      <name>status</name>
-    </property>
-    <property>
-      <type>org.xwiki.contrib.roadmap.RoadmapStatus</type>
     </property>
   </object>
 </xwikidoc>
