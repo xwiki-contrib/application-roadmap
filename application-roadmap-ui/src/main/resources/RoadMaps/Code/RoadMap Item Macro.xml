@@ -293,7 +293,7 @@
       <contentJavaType>Wiki</contentJavaType>
     </property>
     <property>
-      <contentType>No content</contentType>
+      <contentType>Optional</contentType>
     </property>
     <property>
       <defaultCategory>Content</defaultCategory>
