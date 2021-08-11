@@ -55,6 +55,6 @@
   "defaultOrder": "desc"
 })
 
-#livetable("roadmap" $columns $columnsProperties $options)
+#livetable("roadmaps" $columns $columnsProperties $options)
 {{/velocity}}</content>
 </xwikidoc>

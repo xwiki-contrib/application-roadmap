@@ -45,11 +45,19 @@
   <scm>
     <connection>scm:git:git://github.com:xwiki-contrib/application-roadmap.git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/application-roadmap.git</developerConnection>
-    <url>https://github.com/xwiki-contrib/macro-pdfviewer</url>
+    <url>https://github.com/xwiki-contrib/application-roadmap</url>
     <tag>HEAD</tag>
   </scm>
   <modules>
     <module>application-roadmap-api</module>
     <module>application-roadmap-ui</module>
   </modules>
+  <profiles>
+    <profile>
+      <id>integration-tests</id>
+      <modules>
+        <module>application-roadmap-test</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>

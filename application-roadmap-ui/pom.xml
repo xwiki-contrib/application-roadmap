@@ -46,8 +46,21 @@
     </dependency>
     <dependency>
       <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-livetable-ui</artifactId>
+      <version>13.6</version>
+      <type>xar</type>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-rendering-macro-velocity</artifactId>
       <version>${platform.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-rendering-macro-include</artifactId>
+      <version>13.6</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -64,9 +77,28 @@
     </dependency>
     <dependency>
       <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-sheet-ui</artifactId>
+      <version>${platform.version}</version>
+      <scope>runtime</scope>
+      <type>xar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-administration-ui</artifactId>
       <version>${platform.version}</version>
+      <scope>runtime</scope>
       <type>xar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-rendering-macro-include</artifactId>
+      <version>13.6</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.rendering</groupId>
+      <artifactId>xwiki-rendering-macro-content</artifactId>
+      <version>13.6</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -82,6 +114,15 @@
       <version>${platform.version}</version>
       <type>xar</type>
       <scope>runtime</scope>
+    </dependency>
+<!--    WebJars-->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>requirejs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery</artifactId>
     </dependency>
   </dependencies>
 </project>
