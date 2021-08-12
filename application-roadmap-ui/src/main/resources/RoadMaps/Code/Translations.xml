@@ -39,8 +39,8 @@
   <content>roadmap.panel.title=Roadmaps
 
 roadmap.class.doc.title=Roadmap Title
-roadmap.class.startDate=Starting Date
-roadmap.class.endDate=Ending Date
+roadmap.class.startDate=Start Date
+roadmap.class.endDate=End Date
 roadmap.class.status=Status
 roadmap.class.capacity=Capacity
 roadmap.class.shortScope=Short Scope

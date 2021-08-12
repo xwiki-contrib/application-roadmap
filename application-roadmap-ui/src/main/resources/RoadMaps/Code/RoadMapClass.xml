@@ -91,7 +91,7 @@
       <name>endDate</name>
       <number>2</number>
       <picker>1</picker>
-      <prettyName>Ending Date</prettyName>
+      <prettyName>End Date</prettyName>
       <size>11</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -124,7 +124,7 @@
       <name>startDate</name>
       <number>1</number>
       <picker>1</picker>
-      <prettyName>Starting Date</prettyName>
+      <prettyName>Start Date</prettyName>
       <size>11</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
