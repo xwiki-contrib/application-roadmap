@@ -78,18 +78,20 @@
 &lt;div class="xform">&#xd;
   &lt;dl>&#xd;
   &lt;div class="row">&#xd;
-    &lt;div class="col-md-6 col-lg-4">&#xd;
+    &lt;div class="col-md-4 col-lg-4">&#xd;
       #showProperty($xclass.startDate, 'calendar', $editing, $xobject)&#xd;
     &lt;/div>&#xd;
-    &lt;div class="col-md-6 col-lg-4">&#xd;
+    &lt;div class="col-md-4 col-lg-4">&#xd;
       #showProperty($xclass.endDate, 'calendar', $editing, $xobject)&#xd;
+    &lt;/div>&#xd;
+    &lt;div class="col-md-4 col-lg-4">&#xd;
+      #showProperty($xclass.status, 'play', $editing, $xobject)&#xd;
     &lt;/div>&#xd;
   &lt;/div>&#xd;
   #foreach ($property in $xclass.properties)&#xd;
-    #if ($property.name != 'startDate' &amp;&amp; $property.name != 'endDate')&#xd;
-      #if ($property.name == 'status')&#xd;
-        #set ($propertyIcon = 'play')&#xd;
-      #elseif ($property.name == 'capacity')&#xd;
+    #if ($property.name != 'startDate' &amp;&amp; $property.name != 'endDate' &amp;&amp; $property.name !=
+  'status')&#xd;
+      #if ($property.name == 'capacity')&#xd;
         #set ($propertyIcon = 'list')&#xd;
       #else&#xd;
         #set ($propertyIcon = 'file-text')&#xd;
