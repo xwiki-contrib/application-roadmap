@@ -20,8 +20,8 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.ConfigurationClass" locale="">
-  <web>RoadMaps.Code</web>
+<xwikidoc version="1.4" reference="Roadmaps.Code.ConfigurationClass" locale="">
+  <web>Roadmaps.Code</web>
   <name>ConfigurationClass</name>
   <language/>
   <defaultLanguage/>
@@ -40,11 +40,11 @@
 ## Replace the default space with the space where you want your documents to be created.
 ## Replace the default parent with the one of your choice and save the document.
 ##
-#set ($defaultSpace = 'RoadMaps')
-#set ($defaultParent = 'RoadMaps.WebHome')
+#set ($defaultSpace = 'Roadmaps')
+#set ($defaultParent = 'Roadmaps.WebHome')
 {{/velocity}}</content>
   <class>
-    <name>RoadMaps.Code.ConfigurationClass</name>
+    <name>Roadmaps.Code.ConfigurationClass</name>
     <customClass/>
     <customMapping/>
     <defaultViewSheet/>
@@ -71,7 +71,7 @@
     </statusValues>
   </class>
   <object>
-    <name>RoadMaps.Code.ConfigurationClass</name>
+    <name>Roadmaps.Code.ConfigurationClass</name>
     <number>0</number>
     <className>XWiki.ClassSheetBinding</className>
     <guid>186dcca5-59f7-4c6f-b1cc-b6b70115315f</guid>
@@ -115,7 +115,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.ConfigurationClass</name>
+    <name>Roadmaps.Code.ConfigurationClass</name>
     <number>0</number>
     <className>XWiki.DocumentSheetBinding</className>
     <guid>c4f72f33-99f3-4f6b-af39-437d64b09541</guid>

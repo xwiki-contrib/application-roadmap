@@ -20,9 +20,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.RoadMapTemplateProvider" locale="">
-  <web>RoadMaps.Code</web>
-  <name>RoadMapTemplateProvider</name>
+<xwikidoc version="1.4" reference="Roadmaps.Code.RoadmapTemplateProvider" locale="">
+  <web>Roadmaps.Code</web>
+  <name>RoadmapTemplateProvider</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -31,14 +31,14 @@
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <version>1.1</version>
-  <title>RoadMap Template Provider</title>
+  <title>Roadmap Template Provider</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content/>
   <object>
-    <name>RoadMaps.Code.RoadMapTemplateProvider</name>
+    <name>Roadmaps.Code.RoadmapTemplateProvider</name>
     <number>0</number>
     <className>XWiki.TemplateProviderClass</className>
     <guid>cd5d5108-816c-4316-88f7-10204bb823af</guid>
@@ -247,28 +247,28 @@
       <creationRestrictionsAreSuggestions>0</creationRestrictionsAreSuggestions>
     </property>
     <property>
-      <description>Add a new RoadMap entry.</description>
+      <description>Add a new Roadmap entry.</description>
     </property>
     <property>
       <icon>group</icon>
     </property>
     <property>
-      <name>RoadMap</name>
+      <name>Roadmap</name>
     </property>
     <property>
       <spaces>
-        <value>RoadMaps</value>
+        <value>Roadmaps</value>
       </spaces>
     </property>
     <property>
-      <template>RoadMaps.Code.RoadMapTemplate</template>
+      <template>Roadmaps.Code.RoadmapTemplate</template>
     </property>
     <property>
       <terminal/>
     </property>
     <property>
       <visibilityRestrictions>
-        <value>RoadMaps</value>
+        <value>Roadmaps</value>
       </visibilityRestrictions>
     </property>
   </object>

@@ -20,8 +20,8 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.Translations" locale="">
-  <web>RoadMaps.Code</web>
+<xwikidoc version="1.4" reference="Roadmaps.Code.Translations" locale="">
+  <web>Roadmaps.Code</web>
   <name>Translations</name>
   <language/>
   <defaultLanguage>en</defaultLanguage>
@@ -51,7 +51,7 @@ roadmap.status.notStarted=Not Started
 roadmap.status.finished=Finished
 roadmap.status.inProgress=In Progress</content>
   <object>
-    <name>RoadMaps.Code.Translations</name>
+    <name>Roadmaps.Code.Translations</name>
     <number>0</number>
     <className>XWiki.TranslationDocumentClass</className>
     <guid>fd509472-0adb-4e22-8a24-bc65d2c637e3</guid>

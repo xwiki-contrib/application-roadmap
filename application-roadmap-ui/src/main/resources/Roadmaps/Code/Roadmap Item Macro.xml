@@ -20,9 +20,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.RoadMap Item Macro" locale="">
-  <web>RoadMaps.Code</web>
-  <name>RoadMap Item Macro</name>
+<xwikidoc version="1.4" reference="Roadmaps.Code.Roadmap Item Macro" locale="">
+  <web>Roadmaps.Code</web>
+  <name>Roadmap Item Macro</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -39,7 +39,7 @@
   <content>
 </content>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>Roadmaps.Code.Roadmap Item Macro</name>
     <number>0</number>
     <className>XWiki.WikiMacroClass</className>
     <guid>a1fd04cb-3ac2-47ea-aa7f-2b98e3499d04</guid>
@@ -252,7 +252,7 @@
 #set ($urlString = $escapetool.xml($wikimacro.parameters.url))
 #set ($statusKey = $xcontext.macro.params.status)
 ## get the config document and obj
-#set ($confObj = $xwiki.getDocument("RoadMaps.Code.Configuration").get("RoadMaps.Code.ConfigurationClass"))
+#set ($confObj = $xwiki.getDocument("Roadmaps.Code.Configuration").get("Roadmaps.Code.ConfigurationClass"))
 ## get the json of the possible roadmap status values and their associated icons
 #set ($json = $confObj.getStringValue("statusValues"))
 #set ($jsonObj = $jsontool.fromString($json))
@@ -319,7 +319,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>Roadmaps.Code.Roadmap Item Macro</name>
     <number>0</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>e10c22df-c778-41a3-b539-87091ccca1ac</guid>
@@ -397,7 +397,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>Roadmaps.Code.Roadmap Item Macro</name>
     <number>1</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>ba369109-3741-4c4d-b8e3-737288443fb1</guid>
@@ -475,7 +475,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>Roadmaps.Code.Roadmap Item Macro</name>
     <number>2</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>5270b2ce-1c42-4f1a-9839-63f7bef90cdc</guid>
@@ -553,7 +553,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>Roadmaps.Code.Roadmap Item Macro</name>
     <number>3</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>4c89553b-5fa2-414f-b306-23ec7d9f4d3c</guid>
@@ -631,7 +631,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>Roadmaps.Code.Roadmap Item Macro</name>
     <number>4</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>edaa1a11-c0dd-472b-b00f-503050007812</guid>
@@ -709,7 +709,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.RoadMap Item Macro</name>
+    <name>Roadmaps.Code.Roadmap Item Macro</name>
     <number>5</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>7393aad0-1495-4021-bc78-ed3db4abc8c2</guid>

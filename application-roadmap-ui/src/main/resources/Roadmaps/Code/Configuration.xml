@@ -20,8 +20,8 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.Configuration" locale="">
-  <web>RoadMaps.Code</web>
+<xwikidoc version="1.4" reference="Roadmaps.Code.Configuration" locale="">
+  <web>Roadmaps.Code</web>
   <name>Configuration</name>
   <language/>
   <defaultLanguage/>
@@ -38,12 +38,12 @@
   <hidden>true</hidden>
   <content/>
   <object>
-    <name>RoadMaps.Code.Configuration</name>
+    <name>Roadmaps.Code.Configuration</name>
     <number>0</number>
-    <className>RoadMaps.Code.ConfigurationClass</className>
+    <className>Roadmaps.Code.ConfigurationClass</className>
     <guid>74141eef-336c-463c-8d0f-1ec32ca7c21a</guid>
     <class>
-      <name>RoadMaps.Code.ConfigurationClass</name>
+      <name>Roadmaps.Code.ConfigurationClass</name>
       <customClass/>
       <customMapping/>
       <defaultViewSheet/>
@@ -75,7 +75,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.Configuration</name>
+    <name>Roadmaps.Code.Configuration</name>
     <number>0</number>
     <className>XWiki.ConfigurableClass</className>
     <guid>79ab1115-bd7c-4290-9efb-6a77761c7ac0</guid>
@@ -290,7 +290,7 @@
       <categoryIcon/>
     </property>
     <property>
-      <codeToExecute>{{display reference="RoadMaps.Code.Configuration"/}}</codeToExecute>
+      <codeToExecute>{{display reference="Roadmaps.Code.Configuration"/}}</codeToExecute>
     </property>
     <property>
       <configurationClass/>

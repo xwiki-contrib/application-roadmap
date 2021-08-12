@@ -20,9 +20,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.RoadMapSheet" locale="">
-  <web>RoadMaps.Code</web>
-  <name>RoadMapSheet</name>
+<xwikidoc version="1.4" reference="Roadmaps.Code.RoadmapSheet" locale="">
+  <web>Roadmaps.Code</web>
+  <name>RoadmapSheet</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -31,7 +31,7 @@
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <version>1.1</version>
-  <title>#if($doc.documentReference.name == 'RoadMapSheet')RoadMap Sheet#{else}$services.display.title($doc, {'displayerHint': 'default', 'outputSyntaxId': 'plain/1.0'})#end</title>
+  <title>#if($doc.documentReference.name == 'RoadmapSheet')Roadmap Sheet#{else}$services.display.title($doc, {'displayerHint': 'default', 'outputSyntaxId': 'plain/1.0'})#end</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -68,13 +68,13 @@
 }))&#xd;
 #set ($editing = $xcontext.action == 'edit')&#xd;
 ## The object to display.&#xd;
-#set ($xobject = $doc.getObject('RoadMaps.Code.RoadMapClass'))&#xd;
+#set ($xobject = $doc.getObject('Roadmaps.Code.RoadmapClass'))&#xd;
 ## The class that describes the object properties.&#xd;
 #set ($xclass = $xobject.xWikiClass)&#xd;
 ## Make sure the following display* method calls use the right object.&#xd;
 #set ($discard = $doc.use($xobject))&#xd;
 ## Using the xform vertical form layout.&#xd;
-#set ($discard = $xwiki.ssx.use('RoadMaps.Code.RoadMapSheet'))&#xd;
+#set ($discard = $xwiki.ssx.use('Roadmaps.Code.RoadmapSheet'))&#xd;
 &lt;div class="xform">&#xd;
   &lt;dl>&#xd;
   &lt;div class="row">&#xd;
@@ -110,7 +110,7 @@
 {{/html}}&#xd;
 {{/velocity}}</content>
   <object>
-    <name>RoadMaps.Code.RoadMapSheet</name>
+    <name>Roadmaps.Code.RoadmapSheet</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
     <guid>8a5aaf7e-c7ec-4692-abda-3844e9007c4c</guid>

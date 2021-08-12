@@ -20,8 +20,8 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.Capacity Macro" locale="">
-  <web>RoadMaps.Code</web>
+<xwikidoc version="1.4" reference="Roadmaps.Code.Capacity Macro" locale="">
+  <web>Roadmaps.Code</web>
   <name>Capacity Macro</name>
   <language/>
   <defaultLanguage/>
@@ -38,7 +38,7 @@
   <hidden>true</hidden>
   <content/>
   <object>
-    <name>RoadMaps.Code.Capacity Macro</name>
+    <name>Roadmaps.Code.Capacity Macro</name>
     <number>0</number>
     <className>XWiki.WikiMacroClass</className>
     <guid>b7c1e13f-3c74-4b5b-9b36-ac7f26c1f30f</guid>
@@ -293,7 +293,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.Capacity Macro</name>
+    <name>Roadmaps.Code.Capacity Macro</name>
     <number>0</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>f2de2ef0-ad21-41a6-a02b-7bd895c61392</guid>
@@ -371,7 +371,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.Capacity Macro</name>
+    <name>Roadmaps.Code.Capacity Macro</name>
     <number>1</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>efa02d01-c9b2-4737-a33b-077f373f4b96</guid>
@@ -449,7 +449,7 @@
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.Capacity Macro</name>
+    <name>Roadmaps.Code.Capacity Macro</name>
     <number>2</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>e19cea22-f5dd-463f-a749-1d998cdf3d32</guid>
@@ -514,7 +514,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description>Any additional information with regards to the capacity of this road-map or the project associated with the remaining percentage.</description>
+      <description>Any additional information with regards to the capacity of this roadmap or the project associated with the remaining percentage.</description>
     </property>
     <property>
       <mandatory>0</mandatory>

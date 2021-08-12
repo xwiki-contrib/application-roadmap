@@ -20,8 +20,8 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="RoadMaps.Code.ConfigurationSheet" locale="">
-  <web>RoadMaps.Code</web>
+<xwikidoc version="1.4" reference="Roadmaps.Code.ConfigurationSheet" locale="">
+  <web>Roadmaps.Code</web>
   <name>ConfigurationSheet</name>
   <language/>
   <defaultLanguage/>
@@ -80,17 +80,17 @@
 #set($discard = $xwiki.ssx.use('IconThemesCode.IconPicker'))
 #set($discard = $xwiki.ssx.use('AppWithinMinutes.ClassSheetGenerator'))
 
-#set ($roadmapConfigClassName = 'RoadMaps.Code.ConfigurationClass')
+#set ($roadmapConfigClassName = 'Roadmaps.Code.ConfigurationClass')
 #set ($discard = $doc.use($roadmapConfigClassName))
-#set ($roadmapConfig = $xwiki.getDocument("RoadMaps.Code.Configuration"))
+#set ($roadmapConfig = $xwiki.getDocument("Roadmaps.Code.Configuration"))
 #set ($editing = $xcontext.action == 'edit' || $xcontext.action == 'admin')
 #set ($mode = "#if ($editing)edit#{else}view#end")
 
 == Roadmap Item Macro Statuses ==
 {{html wiki="true" clean="false"}}
 #if ($xcontext.action == 'admin')
-  #set ($discard = $xwiki.jsx.use('RoadMaps.Code.ConfigurationSheet'))
-  #set ($discard = $xwiki.ssx.use('RoadMaps.Code.ConfigurationSheet'))
+  #set ($discard = $xwiki.jsx.use('Roadmaps.Code.ConfigurationSheet'))
+  #set ($discard = $xwiki.ssx.use('Roadmaps.Code.ConfigurationSheet'))
   
   &lt;button id="addStatus" class='btn btn-secondary'&gt;Add Status&lt;/button&gt;
     &lt;form action="$doc.getURL('save')" id="xsaveForm" class="roadmap-config xform"&gt;
@@ -122,7 +122,7 @@
 {{/html}}
 {{/velocity}}</content>
   <object>
-    <name>RoadMaps.Code.ConfigurationSheet</name>
+    <name>Roadmaps.Code.ConfigurationSheet</name>
     <number>0</number>
     <className>XWiki.JavaScriptExtension</className>
     <guid>59109163-0be1-483e-9d1e-805e2f6098bd</guid>
@@ -307,7 +307,7 @@ function linkIconPickerTo($, id) {
     </property>
   </object>
   <object>
-    <name>RoadMaps.Code.ConfigurationSheet</name>
+    <name>Roadmaps.Code.ConfigurationSheet</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
     <guid>00db1fcb-0c4c-4fa8-928d-9d31204c873e</guid>
