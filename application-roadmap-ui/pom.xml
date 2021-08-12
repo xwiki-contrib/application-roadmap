@@ -47,7 +47,7 @@
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-livetable-ui</artifactId>
-      <version>13.6</version>
+      <version>${platform.version}</version>
       <type>xar</type>
       <scope>runtime</scope>
     </dependency>
@@ -60,7 +60,7 @@
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-rendering-macro-include</artifactId>
-      <version>13.6</version>
+      <version>${platform.version}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -92,13 +92,13 @@
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-rendering-macro-include</artifactId>
-      <version>13.6</version>
+      <version>${platform.version}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.xwiki.rendering</groupId>
       <artifactId>xwiki-rendering-macro-content</artifactId>
-      <version>13.6</version>
+      <version>${rendering.version}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
