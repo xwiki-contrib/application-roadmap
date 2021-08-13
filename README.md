@@ -11,4 +11,4 @@ Template and various macros to ease the creation of roadmaps
 * License: LGPL 2.1 
 * Translations: N/A 
 * Sonar Dashboard: N/A 
-* Continuous Integration Status: N/A 
+* Continuous Integration Status: [![Build Status](https://ci.xwiki.org/buildStatus/icon?job=XWiki+Contrib%2Fapplication-roadmap%2Fmain)](https://ci.xwiki.org/job/XWiki%20Contrib/job/application-roadmap/job/main/)
