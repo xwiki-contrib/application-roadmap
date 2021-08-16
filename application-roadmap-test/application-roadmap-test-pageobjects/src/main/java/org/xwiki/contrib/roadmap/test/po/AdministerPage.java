@@ -36,7 +36,7 @@ public class AdministerPage extends ViewPage
     private WebElement saveButton;
 
     public static AdministerPage goToPage() {
-        getUtil().gotoPage("xwiki", "XWikiPreferences", "admin", "editor=globaladmin&section=Roadmap");
+        getUtil().gotoPage("XWiki", "XWikiPreferences", "admin", "editor=globaladmin&section=Roadmap");
         return new AdministerPage();
     }
 
@@ -48,9 +48,12 @@ public class AdministerPage extends ViewPage
         return addStatusButton;
     }
 
-    public void addStatus() {
+    public WebElement addStatus() {
         addStatusButton.click();
-        roadmapItemConfig.findElement(By.xpath("//"));
+        WebElement addedStatus = roadmapItemConfig.findElement(By.xpath("//div[@id='template']/preceding-sibling::div"
+            + "[1]"));
+        return addedStatus;
+
     }
 
     public void save() {

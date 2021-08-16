@@ -22,6 +22,7 @@ package org.xwiki.contrib.roadmap.test.ui;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ import org.xwiki.contrib.roadmap.test.po.AdministerPage;
 import org.xwiki.test.docker.junit5.UITest;
 import org.xwiki.test.ui.TestUtils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -39,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @UITest
 public class AdministrationPageIT
 {
-    private static final int ROADMAP_STATUS_COUNT = 3;
+    private static final int ROADMAP_STATUS_COUNT = 4;
 
     @BeforeAll
     public void setup(TestUtils setup) {
@@ -47,23 +49,30 @@ public class AdministrationPageIT
     }
 
     @Test
+    @Order(1)
     public void validateTheNumberOfFieldsInPage(TestUtils testUtils) {
         AdministerPage administerPage = AdministerPage.goToPage();
         WebElement roadmapItemStatusConfig = administerPage.getRoadmapItemConfig();
         List<WebElement> roadmapItemStatuses = roadmapItemStatusConfig.findElements(By.className("jsonKey"));
 
-        assertTrue(roadmapItemStatuses.size() == ROADMAP_STATUS_COUNT);
+        assertEquals(roadmapItemStatuses.size(), ROADMAP_STATUS_COUNT);
     }
 
     @Test
-    public void validateAdditionOfStatus() {
+    @Order(2)
+    public void validateAdditionAndDeletionOfStatus()
+    {
         AdministerPage administerPage = AdministerPage.goToPage();
-        administerPage.addStatus();
+        WebElement addedStatus = administerPage.addStatus();
 
         WebElement roadmapItemStatusConfig = administerPage.getRoadmapItemConfig();
         List<WebElement> roadmapItemStatuses = roadmapItemStatusConfig.findElements(By.className("jsonKey"));
-        assertTrue(roadmapItemStatuses.size() == ROADMAP_STATUS_COUNT + 1);
+        assertEquals(ROADMAP_STATUS_COUNT + 1, roadmapItemStatuses.size());
 
+        addedStatus.findElement(By.xpath("//a[@class='pull-right remove']")).click();
+
+        roadmapItemStatuses = roadmapItemStatusConfig.findElements(By.className("jsonKey"));
+        assertEquals(ROADMAP_STATUS_COUNT, roadmapItemStatuses.size());
     }
 
 }
