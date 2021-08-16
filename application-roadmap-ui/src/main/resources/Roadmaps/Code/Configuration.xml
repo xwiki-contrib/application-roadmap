@@ -70,8 +70,7 @@
       </statusValues>
     </class>
     <property>
-      <statusValues>{"inProgress":{"prettyName":"In progress","icon":"wrench"},"notStarted":{"prettyName":"Not
-        started","icon":"cross"},"finished":{"prettyName":"Finished","icon":"check"}}</statusValues>
+      <statusValues>{"inProgress":{"prettyName":"In progress","icon":"wrench"},"notStarted":{"prettyName":"Not started","icon":"cross"},"finished":{"prettyName":"Finished","icon":"check"}}</statusValues>
     </property>
   </object>
   <object>
