@@ -248,14 +248,14 @@
 #set ($additionalInfo = $!wikimacro.parameters.additionalInfo)
 #set ($otherPercentage = 100 - $percentage)
 #if ($otherPercentage &lt;= 0)
-#set($otherPercentage = '')
+  #set($otherPercentage = '')
 #else
-#set($otherPercentage = "$otherPercentage.intValue()% ")
+  #set($otherPercentage = "$otherPercentage.intValue()% ")
 #end
 {{html wiki='true'}}
 &lt;span&gt;
   {{useravatar username="$user.reference" width="30" height="30" /}}
-  &lt;a href="$xwiki.getURL($user.reference)"&gt;$user.reference.name&lt;/a&gt;: $percentage% #if("$!otherPercentage"!='' || "$!additionalInfo" != '')($otherPercentage$!additionalInfo)#end
+  $xwiki.getUserName($user.reference): $percentage% #if("$!otherPercentage"!='' || "$!additionalInfo" != '')($otherPercentage$!additionalInfo)#end
 &lt;/span&gt;
 {{/html}}
 {{/velocity}}

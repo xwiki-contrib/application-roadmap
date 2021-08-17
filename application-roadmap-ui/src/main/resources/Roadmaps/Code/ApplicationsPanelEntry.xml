@@ -170,7 +170,7 @@
       <name>roadmaps.panels.roadmapapplication</name>
     </property>
     <property>
-      <parameters>label=$services.localization.render('roadmap.panel.title')
+      <parameters>label=$services.localization.render('roadmap.application.title')
 target=Roadmaps.WebHome
 icon=icon:group</parameters>
     </property>

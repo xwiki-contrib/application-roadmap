@@ -265,12 +265,11 @@
 #set ($icon = $jsonObj.get($statusKey).get("icon"))
 #if ("$!icon" == '') #set($icon = 'list')#end
 {{html wiki='true'}}
-  &lt;span #if($optional=='true')class="optional"#end&gt;
+  &lt;span #if($optional=='true')class="roadmap-item-optional"#end&gt;
     &lt;span class="status-icon" title="$!jsonObj.get($statusKey).prettyName"&gt;$!services.icon.renderHTML($!icon)&lt;/span&gt;
     &lt;span class="users"&gt;
     #foreach ($user in $users)
-      &lt;a href="$xwiki.getURL($user.reference)"&gt;{{useravatar username="$user.reference" width='20'
-        height='20'/}} $user.reference.name&lt;/a&gt;#if($foreach.hasNext), #else: #end
+      {{useravatar username="$user.reference" width='20' height='20'/}} $xwiki.getUserName($user.reference)#if($foreach.hasNext), #else: #end
     #end
     &lt;/span&gt;#if("$!urlString" != '')[[$file&gt;&gt;$urlString]] - #end
     #if ("$!description" != '')
@@ -280,7 +279,7 @@
       &lt;em&gt; - $project&lt;/em&gt;
     #end
     #if ($optional=='true')
-      &lt;em&gt;(optional)&lt;/em&gt;
+      &lt;em&gt;($escapetool.xml($services.localization.render('roadmap.itemMacro.optional')))&lt;/em&gt;
     #end
   &lt;/span&gt;
 {{/html}}

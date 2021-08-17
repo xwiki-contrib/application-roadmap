@@ -69,7 +69,7 @@ public class AdministrationPageIT
         List<WebElement> roadmapItemStatuses = roadmapItemStatusConfig.findElements(By.className("jsonKey"));
         assertEquals(ROADMAP_STATUS_COUNT + 1, roadmapItemStatuses.size());
 
-        addedStatus.findElement(By.xpath("//a[@class='pull-right remove']")).click();
+        addedStatus.findElement(By.xpath("//a[@class='pull-right removeStatus']")).click();
 
         roadmapItemStatuses = roadmapItemStatusConfig.findElements(By.className("jsonKey"));
         assertEquals(ROADMAP_STATUS_COUNT, roadmapItemStatuses.size());

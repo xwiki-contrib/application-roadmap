@@ -36,16 +36,22 @@
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content>roadmap.panel.title=Roadmaps
+  <content>roadmap.application.title=Roadmaps
+roadmap.administration.addStatus=Add Status
+roadmap.itemMacro.optional=optional
 
-roadmap.class.doc.title=Roadmap Title
-roadmap.class.startDate=Start Date
-roadmap.class.endDate=End Date
-roadmap.class.status=Status
-roadmap.class.capacity=Capacity
-roadmap.class.shortScope=Short Scope
-roadmap.class.detailedScope=Detailed Scope
-roadmap.class.emptyvalue=No Status
+roadmap.livetable.doc.title=Roadmap Title
+roadmap.livetable.startDate=Start Date
+roadmap.livetable.endDate=End Date
+roadmap.livetable.status=Status
+roadmap.livetable.emptyvalue=No Status
+
+Roadmaps.Code.RoadmapClass_startDate=Start Date
+Roadmaps.Code.RoadmapClass_endDate=End Date
+Roadmaps.Code.RoadmapClass_status=Status
+Roadmaps.Code.RoadmapClass_capacity=Capacity
+Roadmaps.Code.RoadmapClass_shortScope=Short Scope
+Roadmaps.Code.RoadmapClass_detailedScope=Detailed Scope
 
 roadmap.status.notStarted=Not Started
 roadmap.status.finished=Finished

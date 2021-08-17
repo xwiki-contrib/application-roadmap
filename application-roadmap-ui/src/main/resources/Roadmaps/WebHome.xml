@@ -41,16 +41,16 @@
 
 #set($columns = ["doc.title", "startDate", "endDate", "status"])
 #set ($columnsProperties = {
-  "doc.title" : {"type": "text", "link" : "view", "html": "true"},
+  "doc.title" : {"type": "text", "link" : "view"},
   "startDate": {"type": "date", "sortable": true},
   "endDate": {"type": "date", "sortable": true},
   "status": { "type": "text", "sortable": true}
 })
 #set($options = {
   "className": "Roadmaps.Code.RoadmapClass",
-  "translationPrefix" : "roadmap.class.",
+  "translationPrefix" : "roadmap.livetable.",
   "tagCloud" : true,
-  "rowCOunt": 10,
+  "rowCount": 10,
   "selectedColumn": "startDate",
   "defaultOrder": "desc"
 })

@@ -108,6 +108,7 @@
       <type>xar</type>
       <scope>runtime</scope>
     </dependency>
+<!--    App Within Minutes application for the computed content property-->
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-appwithinminutes-ui</artifactId>

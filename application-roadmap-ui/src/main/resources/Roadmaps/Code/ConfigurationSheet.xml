@@ -52,7 +52,7 @@
   &lt;div class="row $!divClass" id="${key}"&gt;
   #if ($xcontext.action == 'admin')
     &lt;div class="col-xs-12 col-md-12"&gt;
-      &lt;a id="${key}" class="pull-right remove"&gt;&lt;span class="fa fa-times"&gt;&lt;/span&gt;&lt;/a&gt;
+      &lt;a id="${key}" class="pull-right removeStatus"&gt;&lt;span class="fa fa-times"&gt;&lt;/span&gt;&lt;/a&gt;
     &lt;/div&gt;
   #end
   &lt;div class="col-xs-12 col-md-6"&gt;
@@ -92,7 +92,8 @@
   #set ($discard = $xwiki.jsx.use('Roadmaps.Code.ConfigurationSheet'))
   #set ($discard = $xwiki.ssx.use('Roadmaps.Code.ConfigurationSheet'))
   
-  &lt;button id="addStatus" class='btn btn-secondary'&gt;Add Status&lt;/button&gt;
+  &lt;button id="addStatus" class='btn
+    btn-secondary'&gt;$escapetool.xml($services.localization.render("roadmap.administration.addStatus"))&lt;/button&gt;
     &lt;form action="$doc.getURL('save')" id="xsaveForm" class="roadmap-config xform"&gt;
       &lt;div class="hidden"&gt;
         &lt;input type="hidden" name="form_token" value="$!escapetool.xml($services.csrf.token)"/&gt;
@@ -267,7 +268,7 @@ require(['jquery', 'xwiki-icon-picker'], function ($) {
     linkIconPickerTo($, randomName);
   });
   
-  $(document).on('click', 'a.remove', function () { 
+  $(document).on('click', 'a.removeStatus', function () {
     var id = $(this).attr('id');
     delete jsonObj[id];
     $('textarea').val(JSON.stringify(jsonObj));
@@ -411,7 +412,7 @@ function linkIconPickerTo($, id) {
       <cache>long</cache>
     </property>
     <property>
-      <code>.remove {
+      <code>.removeStatus {
   position: absolute;
   right: 1.25em;
   z-index: 1;
