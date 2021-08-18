@@ -27,7 +27,7 @@
   </parent>
   <groupId>org.xwiki.contrib.roadmap</groupId>
   <artifactId>application-roadmap</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.2</version>
   <name>XWiki Roadmap Application - Parent POM</name>
   <description>Application for roadmaps management</description>
   <packaging>pom</packaging>
@@ -45,7 +45,7 @@
     <connection>scm:git:git://github.com:xwiki-contrib/application-roadmap.git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/application-roadmap.git</developerConnection>
     <url>https://github.com/xwiki-contrib/application-roadmap</url>
-    <tag>HEAD</tag>
+    <tag>application-roadmap-1.2</tag>
   </scm>
   <modules>
     <module>application-roadmap-api</module>
