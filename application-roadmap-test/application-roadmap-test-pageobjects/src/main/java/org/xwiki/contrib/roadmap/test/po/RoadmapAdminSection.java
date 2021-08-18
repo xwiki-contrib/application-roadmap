@@ -19,29 +19,39 @@
  */
 package org.xwiki.contrib.roadmap.test.po;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.xwiki.test.ui.po.ViewPage;
+import org.xwiki.administration.test.po.AdministrationSectionPage;
 
-public class AdministerPage extends ViewPage
+public class RoadmapAdminSection extends AdministrationSectionPage
 {
+
+    public static final String SECTION = "Roadmap";
     @FindBy(className = "roadmap-config")
     private WebElement roadmapItemConfig;
 
     @FindBy(id = "addStatus")
     private WebElement addStatusButton;
 
-    @FindBy(name = "action_saveandcontinue")
-    private WebElement saveButton;
+    public RoadmapAdminSection(String section)
+    {
+        super(section);
+    }
 
-    public static AdministerPage goToPage() {
-        getUtil().gotoPage("XWiki", "XWikiPreferences", "admin", "editor=globaladmin&section=Roadmap");
-        return new AdministerPage();
+    public static RoadmapAdminSection gotoPage() {
+        AdministrationSectionPage.gotoPage(SECTION);
+        return new RoadmapAdminSection(SECTION);
     }
 
     public WebElement getRoadmapItemConfig() {
         return roadmapItemConfig;
+    }
+
+    public List<WebElement> getRoadmapItemStatuses() {
+        return roadmapItemConfig.findElements(By.className("jsonKey"));
     }
 
     public WebElement getAddStatusButton() {
@@ -56,8 +66,12 @@ public class AdministerPage extends ViewPage
 
     }
 
+    public static void deleteStatusItem(WebElement statusItem) {
+        statusItem.findElement(By.xpath("//a[@class='pull-right removeStatus']")).click();
+    }
+
     public void save() {
-        saveButton.click();
+        this.clickSave(true);
     }
 
 }

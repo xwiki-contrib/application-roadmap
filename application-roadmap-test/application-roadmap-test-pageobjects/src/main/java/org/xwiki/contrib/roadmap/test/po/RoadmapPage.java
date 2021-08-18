@@ -20,7 +20,9 @@
 package org.xwiki.contrib.roadmap.test.po;
 
 import java.util.Arrays;
+import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.xwiki.test.ui.po.ViewPage;
@@ -30,12 +32,16 @@ public class RoadmapPage extends ViewPage
     @FindBy(xpath = "//div[@class='xform']/dl/dd[@class='editableProperty-viewer'][last()]")
     WebElement detailedScopeContent;
 
-    public static RoadmapPage goToPage(String name) {
+    public static RoadmapPage gotoPage(String name) {
         getUtil().gotoPage(Arrays.asList("Roadmaps", name), "WebHome", "view", "");
         return  new RoadmapPage();
     }
 
-    public WebElement getDetailedScopeContent() {
-        return detailedScopeContent;
+    public String getDetailedScope() {
+        return detailedScopeContent.getText();
+    }
+
+    public List<WebElement> getEditableProperties() {
+        return getUtil().getDriver().findElements(By.className("editableProperty"));
     }
 }

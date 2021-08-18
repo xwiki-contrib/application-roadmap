@@ -24,14 +24,12 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.xwiki.contrib.roadmap.test.po.AdministerPage;
+import org.xwiki.contrib.roadmap.test.po.RoadmapAdminSection;
 import org.xwiki.test.docker.junit5.UITest;
 import org.xwiki.test.ui.TestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests for the Administration Page.
@@ -51,9 +49,8 @@ public class AdministrationPageIT
     @Test
     @Order(1)
     public void validateTheNumberOfFieldsInPage(TestUtils testUtils) {
-        AdministerPage administerPage = AdministerPage.goToPage();
-        WebElement roadmapItemStatusConfig = administerPage.getRoadmapItemConfig();
-        List<WebElement> roadmapItemStatuses = roadmapItemStatusConfig.findElements(By.className("jsonKey"));
+        RoadmapAdminSection roadmapAdminSection = RoadmapAdminSection.gotoPage();
+        List<WebElement> roadmapItemStatuses = roadmapAdminSection.getRoadmapItemStatuses();
 
         assertEquals(roadmapItemStatuses.size(), ROADMAP_STATUS_COUNT);
     }
@@ -62,16 +59,15 @@ public class AdministrationPageIT
     @Order(2)
     public void validateAdditionAndDeletionOfStatus()
     {
-        AdministerPage administerPage = AdministerPage.goToPage();
-        WebElement addedStatus = administerPage.addStatus();
+        RoadmapAdminSection roadmapAdminSection = RoadmapAdminSection.gotoPage();
+        WebElement addedStatus = roadmapAdminSection.addStatus();
 
-        WebElement roadmapItemStatusConfig = administerPage.getRoadmapItemConfig();
-        List<WebElement> roadmapItemStatuses = roadmapItemStatusConfig.findElements(By.className("jsonKey"));
+        List<WebElement> roadmapItemStatuses = roadmapAdminSection.getRoadmapItemStatuses();
         assertEquals(ROADMAP_STATUS_COUNT + 1, roadmapItemStatuses.size());
 
-        addedStatus.findElement(By.xpath("//a[@class='pull-right removeStatus']")).click();
+        RoadmapAdminSection.deleteStatusItem(addedStatus);
 
-        roadmapItemStatuses = roadmapItemStatusConfig.findElements(By.className("jsonKey"));
+        roadmapItemStatuses = roadmapAdminSection.getRoadmapItemStatuses();
         assertEquals(ROADMAP_STATUS_COUNT, roadmapItemStatuses.size());
     }
 

@@ -58,7 +58,7 @@
         <displayFormType>select</displayFormType>
         <displayType/>
         <name>async_cached</name>
-        <number>13</number>
+        <number>12</number>
         <prettyName>Cached</prettyName>
         <unmodifiable>0</unmodifiable>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
@@ -71,7 +71,7 @@
         <largeStorage>0</largeStorage>
         <multiSelect>1</multiSelect>
         <name>async_context</name>
-        <number>14</number>
+        <number>13</number>
         <prettyName>Context elements</prettyName>
         <relationalStorage>0</relationalStorage>
         <separator>, </separator>
@@ -87,7 +87,7 @@
         <displayFormType>select</displayFormType>
         <displayType/>
         <name>async_enabled</name>
-        <number>12</number>
+        <number>11</number>
         <prettyName>Asynchronous rendering</prettyName>
         <unmodifiable>0</unmodifiable>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
@@ -192,16 +192,6 @@
         <unmodifiable>0</unmodifiable>
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
-      <priority>
-        <disabled>0</disabled>
-        <name>priority</name>
-        <number>11</number>
-        <numberType>integer</numberType>
-        <prettyName>Priority</prettyName>
-        <size>10</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
-      </priority>
       <supportsInlineMode>
         <disabled>0</disabled>
         <displayFormType>select</displayFormType>
@@ -264,14 +254,25 @@
 ## use status name if icon is empty
 #set ($icon = $jsonObj.get($statusKey).get("icon"))
 #if ("$!icon" == '') #set($icon = 'list')#end
-{{html wiki='true'}}
+
+#set ($avatarProperties = {
+  "showAlias" : false,
+  "wrapAvatar": true,
+  "useInlineHTML": true
+})
+{{html}}
   &lt;span #if($optional=='true')class="roadmap-item-optional"#end&gt;
     &lt;span class="status-icon" title="$!jsonObj.get($statusKey).prettyName"&gt;$!services.icon.renderHTML($!icon)&lt;/span&gt;
     &lt;span class="users"&gt;
     #foreach ($user in $users)
-      {{useravatar username="$user.reference" width='20' height='20'/}} $xwiki.getUserName($user.reference)#if($foreach.hasNext), #else: #end
+      #displayUser($user.reference, $avatarProperties)#if($foreach.hasNext == false): #end
     #end
-    &lt;/span&gt;#if("$!urlString" != '')[[$file&gt;&gt;$urlString]] - #end
+    &lt;/span&gt;
+    #if("$!urlString" != '')
+      &lt;span class="wikiexternallink"&gt;
+        &lt;a href="$urlString"&gt;$file&lt;/a&gt;
+      &lt;/span&gt;&amp;nbsp;
+    #end
     #if ("$!description" != '')
       $description
     #end
@@ -306,9 +307,6 @@
     </property>
     <property>
       <name>Roadmap Item Macro</name>
-    </property>
-    <property>
-      <priority/>
     </property>
     <property>
       <supportsInlineMode>1</supportsInlineMode>

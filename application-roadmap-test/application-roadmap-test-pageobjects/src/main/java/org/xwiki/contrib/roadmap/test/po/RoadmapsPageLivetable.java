@@ -33,4 +33,9 @@ public class RoadmapsPageLivetable extends LiveTableElement
         String columnId = String.format("xwiki-livetable-roadmaps-filter-%s", columnNumber);
         this.filterColumn(columnId, filterValue);
     }
+
+    public void filterByRoadmapTitle(String pageTitle) {
+        String columnId = String.format("xwiki-livetable-roadmaps-filter-%s", 1);
+        this.filterColumn(columnId, pageTitle);
+    }
 }

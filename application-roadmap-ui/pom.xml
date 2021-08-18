@@ -108,7 +108,7 @@
       <type>xar</type>
       <scope>runtime</scope>
     </dependency>
-<!--    App Within Minutes application for the computed content property-->
+    <!-- App Within Minutes application for the computed content property -->
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-appwithinminutes-ui</artifactId>
@@ -116,7 +116,7 @@
       <type>xar</type>
       <scope>runtime</scope>
     </dependency>
-<!--    WebJars-->
+    <!-- WebJars -->
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>requirejs</artifactId>

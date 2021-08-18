@@ -22,11 +22,9 @@ package org.xwiki.contrib.roadmap.test.ui;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.xwiki.contrib.roadmap.test.po.RoadmapEditPage;
 import org.xwiki.contrib.roadmap.test.po.RoadmapPage;
@@ -56,6 +54,12 @@ public class RoadmapsPageIT
     @BeforeAll
     public void setup(TestUtils setup) {
         setup.loginAsSuperAdmin();
+
+        DocumentReference docRef = new DocumentReference("xwiki", "Roadmaps", SIMPLE_PAGE_TITLE);
+        setup.deletePage(docRef);
+        docRef = new DocumentReference("xwiki", Arrays.asList("Roadmaps", ROADMAP_PAGE_TITLE), "WebHome");
+        setup.deletePage(docRef);
+
         setup.createPage("Roadmaps", SIMPLE_PAGE_TITLE, "", SIMPLE_PAGE_TITLE);
     }
 
@@ -63,8 +67,8 @@ public class RoadmapsPageIT
     @Order(1)
     public void validatePageCreation()
     {
-        RoadmapsPage page = RoadmapsPage.goToPage();
-        ViewPage newRoadmapPage = page.pressCreateButton().create(ROADMAP_PAGE_TITLE).saveAndView();
+        RoadmapsPage page = RoadmapsPage.gotoPage();
+        ViewPage newRoadmapPage = page.createNewRoadmapPage(ROADMAP_PAGE_TITLE);
 
         assertEquals(ROADMAP_PAGE_TITLE, newRoadmapPage.getDocumentTitle());
     }
@@ -72,9 +76,9 @@ public class RoadmapsPageIT
     @Order(2)
     public void validateLivetableDoesNotContainPagesWithoutRoadmapObject()
     {
-        RoadmapsPage page = RoadmapsPage.goToPage();
+        RoadmapsPage page = RoadmapsPage.gotoPage();
         RoadmapsPageLivetable livetable = page.getLiveTable();
-        livetable.filterColumn(1, SIMPLE_PAGE_TITLE);
+        livetable.filterByRoadmapTitle(SIMPLE_PAGE_TITLE);
         // we should get only pages that have roadmap object inside
         assertEquals(0, livetable.getRowCount());
     }
@@ -82,9 +86,9 @@ public class RoadmapsPageIT
     @Order(3)
     public void validateLivetableContainsWithRoadmapObject()
     {
-        RoadmapsPage page = RoadmapsPage.goToPage();
+        RoadmapsPage page = RoadmapsPage.gotoPage();
         RoadmapsPageLivetable livetable = page.getLiveTable();
-        livetable.filterColumn(1, ROADMAP_PAGE_TITLE);
+        livetable.filterByRoadmapTitle(ROADMAP_PAGE_TITLE);
         // we should get only pages that have roadmap object inside
         assertEquals(1, livetable.getRowCount());
     }
@@ -92,36 +96,29 @@ public class RoadmapsPageIT
     @Test
     @Order(4)
     public void validateExistingFieldsOfRoadmapPage(TestUtils testUtils) {
-        RoadmapPage.goToPage(ROADMAP_PAGE_TITLE);
-        List<WebElement> editableProperties = testUtils.getDriver().findElements(By.className("editableProperty"));
+        RoadmapPage roadmapPage = RoadmapPage.gotoPage(ROADMAP_PAGE_TITLE);
+        List<WebElement> editableProperties = roadmapPage.getEditableProperties();
         assertEquals(6, editableProperties.size());
     }
 
     @Test
     @Order(5)
     public void validateTheDetailedScopeEditing() {
-        RoadmapEditPage roadmapEditPage = RoadmapEditPage.goToPage(ROADMAP_PAGE_TITLE);
-        roadmapEditPage.enterTextToDetailedScopeField(DETAILED_SCOPE_TEXT);
+        RoadmapEditPage roadmapEditPage = RoadmapEditPage.gotoPage(ROADMAP_PAGE_TITLE);
+        roadmapEditPage.setDetailedScope(DETAILED_SCOPE_TEXT);
         RoadmapPage roadmapViewPage = roadmapEditPage.saveAndView();
-        String detailedScopeContent = roadmapViewPage.getDetailedScopeContent().getText();
+        String detailedScopeContent = roadmapViewPage.getDetailedScope();
         assertTrue(detailedScopeContent.contains(DETAILED_SCOPE_TEXT));
     }
 
     @Test
     @Order(6)
     public void validateInsertion() {
-        RoadmapEditPage roadmapEditPage = RoadmapEditPage.goToPage(ROADMAP_PAGE_TITLE);
-        roadmapEditPage.enterTextToDetailedScopeField(DETAILED_SCOPE_TEXT);
+        RoadmapEditPage roadmapEditPage = RoadmapEditPage.gotoPage(ROADMAP_PAGE_TITLE);
+        roadmapEditPage.setDetailedScope(DETAILED_SCOPE_TEXT);
         RoadmapPage roadmapViewPage = roadmapEditPage.saveAndView();
-        String detailedScopeContent = roadmapViewPage.getDetailedScopeContent().getText();
+        String detailedScopeContent = roadmapViewPage.getDetailedScope();
         assertTrue(detailedScopeContent.contains(DETAILED_SCOPE_TEXT));
     }
 
-    @AfterAll
-    public void cleanUp(TestUtils testUtils) {
-        DocumentReference docRef = new DocumentReference("xwiki", "Roadmaps", SIMPLE_PAGE_TITLE);
-        testUtils.deletePage(docRef);
-        docRef = new DocumentReference("xwiki", Arrays.asList("Roadmaps", ROADMAP_PAGE_TITLE), "WebHome");
-        testUtils.deletePage(docRef);
-    }
 }

@@ -21,34 +21,30 @@ package org.xwiki.contrib.roadmap.test.po;
 
 import java.util.Arrays;
 
-import javax.swing.text.View;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.xwiki.test.ui.po.ViewPage;
+import org.xwiki.test.ui.po.InlinePage;
 
-public class RoadmapEditPage extends ViewPage
+public class RoadmapEditPage extends InlinePage
 {
-    @FindBy(name = "action_save")
-    private WebElement saveAndViewButton;
-
     @FindBy(xpath = "//textarea[@id='content']")
     private WebElement detailedScopeInput;
 
-    public static RoadmapEditPage goToPage(String name) {
+    public static RoadmapEditPage gotoPage(String name) {
         getUtil().gotoPage(Arrays.asList("Roadmaps", name), "WebHome", "edit", "");
         return new RoadmapEditPage();
     }
 
     public RoadmapPage saveAndView() {
-        saveAndViewButton.click();
+        clickSaveAndView();
         return new RoadmapPage();
     }
     public void save() {
         saveAndView();
     }
 
-    public void enterTextToDetailedScopeField(String text) {
+    public void setDetailedScope(String text) {
+        detailedScopeInput.clear();
         detailedScopeInput.sendKeys(text);
     }
 }

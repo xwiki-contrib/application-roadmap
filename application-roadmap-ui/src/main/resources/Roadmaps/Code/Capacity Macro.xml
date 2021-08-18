@@ -252,10 +252,15 @@
 #else
   #set($otherPercentage = "$otherPercentage.intValue()% ")
 #end
-{{html wiki='true'}}
+#set ($avatarProperties = {
+  "showAlias" : false,
+  "wrapAvatar": true,
+  "useInlineHTML": true
+})
+{{html}}
 &lt;span&gt;
-  {{useravatar username="$user.reference" width="30" height="30" /}}
-  $xwiki.getUserName($user.reference): $percentage% #if("$!otherPercentage"!='' || "$!additionalInfo" != '')($otherPercentage$!additionalInfo)#end
+  #displayUser($user.reference, $avatarProperties): $percentage% #if("$!otherPercentage"!='' || "$!additionalInfo" !=
+        '')($otherPercentage$!additionalInfo)#end
 &lt;/span&gt;
 {{/html}}
 {{/velocity}}

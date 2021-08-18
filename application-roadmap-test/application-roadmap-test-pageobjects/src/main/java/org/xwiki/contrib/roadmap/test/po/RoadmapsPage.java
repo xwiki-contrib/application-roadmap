@@ -19,18 +19,28 @@
  */
 package org.xwiki.contrib.roadmap.test.po;
 
+import org.xwiki.test.ui.po.CreatePagePage;
 import org.xwiki.test.ui.po.ViewPage;
 
 public class RoadmapsPage extends ViewPage
 {
 
-    public static RoadmapsPage goToPage() {
+    public static RoadmapsPage gotoPage() {
         getUtil().gotoPage("Roadmaps", "WebHome");
         return new RoadmapsPage();
     }
     public RoadmapsCreatePage pressCreateButton() {
         getUtil().gotoPage("Roadmaps", "WebHome", "create");
         return new RoadmapsCreatePage();
+    }
+    public RoadmapPage createNewRoadmapPage(String title) {
+        getUtil().gotoPage("Roadmaps", "WebHome", "create");
+
+        CreatePagePage createPagePage = new CreatePagePage();
+        createPagePage.fillForm(title, "Roadmaps", title, false);
+        createPagePage.clickCreate();
+
+        return (new RoadmapEditPage()).saveAndView();
     }
     public RoadmapsPageLivetable getLiveTable() {
         RoadmapsPageLivetable liveTableElement = new RoadmapsPageLivetable();
