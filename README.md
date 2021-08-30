@@ -3,7 +3,7 @@
 Template and various macros to ease the creation of roadmaps 
 
 * Project Lead: [Teo Caras](https://www.xwiki.org/xwiki/bin/view/XWiki/tcaras) 
-* [Documentation & Download](#) 
+* [Documentation & Download](https://extensions.xwiki.org/xwiki/bin/view/Extension/Roadmap%20Application/) 
 * [Issue Tracker](https://jira.xwiki.org/browse/XROADMAP)
 * Communication: [Forum](https://forum.xwiki.org/), [Chat](https://dev.xwiki.org/xwiki/bin/view/Community/Chat)
 * [Development Practices](https://dev.xwiki.org/xwiki/bin/view/Main/WebHome) 
